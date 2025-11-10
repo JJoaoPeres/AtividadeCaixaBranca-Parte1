@@ -16,10 +16,10 @@ public class Main {
         boolean autenticado = usuario.verificarUsuario(login, senha);
 
         if (autenticado) {
-            System.out.println("✅ Usuário autenticado com sucesso!");
+            System.out.println("Usuário autenticado com sucesso!");
             System.out.println("Bem-vindo, " + usuario.nome + "!");
         } else {
-            System.out.println("❌ Login ou senha incorretos.");
+            System.out.println("Login ou senha incorretos.");
         }
 
         sc.close();
