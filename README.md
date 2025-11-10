@@ -64,10 +64,13 @@ NOTAÇÃO DE GRAFO DE FLUXO
 <img width="1024" height="768" alt="Yellow and White Modern Recruitment Process Flow Chart Graph" src="https://github.com/user-attachments/assets/299dbc83-ec3e-4e41-8466-0f6bb253e736" />
 
 COMPLEXIDADE CICLOMÁTICA 
+
 FÓRMULA: M = E − N + 2P
+
 23 - 22 + 2 = 3
 
 CAMINHOS BÁSICOS:
+
 Quando o connection da certo, e o if(rs.next() da certo e o usuário foi achado:
 N1→N2→N3→N4→N5→N7→N8→N9→N10→N11→N12→N13→N14→N15→N17→N18→N19→N20→N21→N22
 Quando o connection da certo, e o if(rs.next() da errado indo para o catch e o usuário não foi achado:
