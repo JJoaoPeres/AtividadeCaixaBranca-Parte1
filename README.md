@@ -1,9 +1,12 @@
+
+
 Link Excel: https://1drv.ms/x/c/49b51658f93dc409/EY_8RKFIQE9Ljo3ge9OItvIBNdgqGKaRvAOe0_O-ASdFQQ?e=tlzTCg
 <img width="1044" height="565" alt="image" src="https://github.com/user-attachments/assets/04ec1869-276e-48a6-9171-316bea9503bd" />
 
+Para acessar o código, segue caminho abaixo:
 
+AtividadeCaixaBranca-Parte1>Login>User
 
-Package Login
 
 Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL.
 Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
