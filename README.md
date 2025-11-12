@@ -1,12 +1,12 @@
 
 
 Link Excel: https://1drv.ms/x/c/49b51658f93dc409/EY_8RKFIQE9Ljo3ge9OItvIBNdgqGKaRvAOe0_O-ASdFQQ?e=tlzTCg
+
 <img width="1044" height="565" alt="image" src="https://github.com/user-attachments/assets/04ec1869-276e-48a6-9171-316bea9503bd" />
 
 Para acessar o código, segue caminho abaixo:
 
 AtividadeCaixaBranca-Parte1>Login>User
-
 
 Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL.
 Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
@@ -74,10 +74,12 @@ CAMINHOS BÁSICOS:
 
 Quando o connection da certo, e o if(rs.next() da certo e o usuário foi achado:
 
-1-2-3-4-5-7-8-9-10-11-12-13-14-15-16-18
+1-2-3-4-5-7-8-9-10-11-12-13-14-15-16-18 
+
 Quando o connection da certo, e o if(rs.next() da errado indo para o catch e o usuário não foi achado:
 
 1-2-3-4-5-7-8-9-10-11-12-13-14-17-18
+
 Quando o connection da errado, e o if(rs.next() da errado indo para o catch e o usuário não foi achado: 
 
 1-2-3-4-5-6-8-9-10-11-12-13-14-17-18
@@ -87,6 +89,7 @@ CAMINHOS INDEPENDENTES:
 * Método conectarBD()
 
 Complexidade ciclomática: 2
+
 Há dois caminhos principais (com ou sem erro na conexão).
 
 Caminhos independentes:
@@ -102,20 +105,25 @@ Caminho 2: Exceção lançada ao tentar conectar
 * Método verificarUsuario()
 
 Complexidade ciclomática: 4
+
 São quatro fluxos possíveis: sucesso total, usuário não encontrado, erro SQL, e falha na conexão.
 
 Caminhos independentes:
 
 Caminho 1: Conexão e consulta bem-sucedidas, rs.next() verdadeiro (usuário encontrado)
+
 → (8 → 9 → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 18)
 
 Caminho 2: Conexão e consulta bem-sucedidas, mas rs.next() falso (usuário não encontrado)
+
 → (8 → 9 → 10 → 11 → 12 → 13 → 14 → 18)
 
 Caminho 3: Erro ao executar a query (entra no bloco catch)
+
 → (8 → 9 → 10 → 11 → 12 → 17 → 18)
 
 Caminho 4: Falha na conexão (conn = null, o try interno falha)
+
 → (8 → 9 → 10 → 12 → 17 → 18)
 
 
