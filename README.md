@@ -73,10 +73,13 @@ FÓRMULA: M = E − N + 2P
 CAMINHOS BÁSICOS:
 
 Quando o connection da certo, e o if(rs.next() da certo e o usuário foi achado:
+
 1-2-3-4-5-7-8-9-10-11-12-13-14-15-16-18
 Quando o connection da certo, e o if(rs.next() da errado indo para o catch e o usuário não foi achado:
+
 1-2-3-4-5-7-8-9-10-11-12-13-14-17-18
 Quando o connection da errado, e o if(rs.next() da errado indo para o catch e o usuário não foi achado: 
+
 1-2-3-4-5-6-8-9-10-11-12-13-14-17-18
 
 CAMINHOS INDEPENDENTES:
@@ -88,10 +91,12 @@ Há dois caminhos principais (com ou sem erro na conexão).
 
 Caminhos independentes:
 
-Caminho 1: Conexão estabelecida com sucesso
+Caminho 1: Conexão estabelecida com sucesso 
+
 → (1 → 2 → 3 → 4 → 5 → 7)
 
 Caminho 2: Exceção lançada ao tentar conectar
+
 → (1 → 2 → 3 → 4 → 5 → 6 → 7)
 
 * Método verificarUsuario()
