@@ -1,16 +1,19 @@
 
 
-Link Excel: https://1drv.ms/x/c/49b51658f93dc409/EY_8RKFIQE9Ljo3ge9OItvIBNdgqGKaRvAOe0_O-ASdFQQ?e=tlzTCg
+Link Excel: https://1drv.ms/x/c/49b51658f93dc409/Edkv_8tclGFLkYvqrDPH9A4B5gv8IwZmQ7f29v4mLbG2LA?e=CGmA1a
 
-<img width="1044" height="565" alt="image" src="https://github.com/user-attachments/assets/04ec1869-276e-48a6-9171-316bea9503bd" />
+<img width="1044" height="514" alt="image" src="https://github.com/user-attachments/assets/14e738e1-f50f-42c3-8c21-f367da0bba52" />
 
 Para acessar o código, segue caminho abaixo:
 
 AtividadeCaixaBranca-Parte1>Login>User
 
-Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL.
-Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
+Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL. Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
 Ainda assim, foi possível confirmar que a conexão com o servidor foi estabelecida com sucesso.
+
+<img width="885" height="531" alt="Captura de tela 2025-11-09 211730" src="https://github.com/user-attachments/assets/0296f811-7959-4bad-86d6-7b96bae8c131" />
+
+Na versão alterada, o código foi corrigido para funcionar corretamente e se tornar mais seguro e organizado. Foram aplicadas melhorias como o uso do driver certo (com.mysql.cj.jdbc.Driver), tratamento de erros com try-with-resources, uso de PreparedStatement para evitar SQL Injection, e inclusão de comentários explicando o funcionamento dos métodos. Essas mudanças deixaram o código mais limpo, seguro e fácil de entender.
 
 AGORA ABAIXO SEGUE NOTAÇÃO DE GRAFO DE FLUXO; COMPLEXIDADE CICLOMÁTICA; CAMINHOS BÁSICOS.
 ```
@@ -47,14 +50,14 @@ import java.sql.Statement;
 
         try { (12)
             Statement st = conn.createStatement();  ( 13 )
-            ResultSet rs = st.executeQuery(sql);    ( 14 )
-            if (rs.next()) { (15)
-                nome = rs.getString("nome"); ( 16 )
+            ResultSet rs = st.executeQuery(sql);    (    )
+            if (rs.next()) { (14)
+                nome = rs.getString("nome"); ( 15 )
                 result = true;               (    )
             }  
-        } catch (Exception e) { (17)
+        } catch (Exception e) { (16)
         } 
-        return result; (18)
+        return result; (17)
     }
 }
 // fim da classe
@@ -62,27 +65,28 @@ import java.sql.Statement;
 ```
 NOTAÇÃO DE GRAFO DE FLUXO 
 
-<img width="1024" height="768" alt="Cópia de Cópia de Yellow and White Modern Recruitment Process Flow Chart Graph" src="https://github.com/user-attachments/assets/c35077fe-2770-4c2f-99b9-9d85c8c3d1b5" />
+<img width="1024" height="768" alt="Cópia de Cópia de Cópia de Yellow and White Modern Recruitment Process Flow Chart Graph" src="https://github.com/user-attachments/assets/6161fd74-fb39-470a-9d11-0f19306a3f77" />
+
 
 COMPLEXIDADE CICLOMÁTICA 
 
 FÓRMULA: M = E − N + 2P
 
-19 - 18 + 2 = 3
+18 - 17 + 2 = 3
 
 CAMINHOS BÁSICOS:
 
 Quando o connection da certo, e o if(rs.next() da certo e o usuário foi achado:
 
-1-2-3-4-5-7-8-9-10-11-12-13-14-15-16-18 
+1-2-3-4-5-7-8-9-10-11-12-13-14-15-17 
 
 Quando o connection da certo, e o if(rs.next() da errado indo para o catch e o usuário não foi achado:
 
-1-2-3-4-5-7-8-9-10-11-12-13-14-17-18
+1-2-3-4-5-7-8-9-10-11-12-13-16-17
 
 Quando o connection da errado, e o if(rs.next() da errado indo para o catch e o usuário não foi achado: 
 
-1-2-3-4-5-6-8-9-10-11-12-13-14-17-18
+1-2-3-4-5-6-7-8-9-10-11-12-13-16-17
 
 CAMINHOS INDEPENDENTES:
 
@@ -112,18 +116,18 @@ Caminhos independentes:
 
 Caminho 1: Conexão e consulta bem-sucedidas, rs.next() verdadeiro (usuário encontrado)
 
-→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 18)
+→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 15 → 17)
 
 Caminho 2: Conexão e consulta bem-sucedidas, mas rs.next() falso (usuário não encontrado)
 
-→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 18)
+→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 17)
 
 Caminho 3: Erro ao executar a query (entra no bloco catch)
 
-→ (8 → 9 → 10 → 11 → 12 → 17 → 18)
+→ (8 → 9 → 10 → 11 → 12 → 16 → 17)
 
 Caminho 4: Falha na conexão (conn = null, o try interno falha)
 
-→ (8 → 9 → 10 → 12 → 17 → 18)
+→ (8 → 9 → 10 → 12 → 16 → 17)
 
 
