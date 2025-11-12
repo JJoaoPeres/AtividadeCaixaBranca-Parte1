@@ -2,7 +2,8 @@
 
 Link Excel: https://1drv.ms/x/c/49b51658f93dc409/Edkv_8tclGFLkYvqrDPH9A4B5gv8IwZmQ7f29v4mLbG2LA?e=CGmA1a
 
-<img width="1044" height="514" alt="image" src="https://github.com/user-attachments/assets/14e738e1-f50f-42c3-8c21-f367da0bba52" />
+<img width="1044" height="565" alt="image" src="https://github.com/user-attachments/assets/dc7b269f-c55d-4e2c-bc5c-febd9bef6515" />
+
 
 Para acessar o código, segue caminho abaixo:
 
