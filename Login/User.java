@@ -2,53 +2,65 @@ package Login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
-//Classe responsável para a conexão com o banco e verificação de login de usuários
 public class User {
 
-    // Método para conectar ao banco de dados
-    public Connection conectarBD() {
-        Connection conn = null; //n1
-        try { //n2
-            Class.forName("com.mysql.cj.jdbc.Driver"); //n3
-            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123"; //n4
-            //estabelece a conexão com o banco
-            conn = DriverManager.getConnection(url); //n5
-        } catch (Exception e) { //n6
-            e.printStackTrace();
-        }
-        return conn; //n7
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/test";
+    private static final String DB_USER = "lopes";
+    private static final String DB_PASS = "123";
+
+    // Conecta ao banco
+    private Connection conectarBD() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
 
-    public String nome = "";
-    public boolean result = false;
-
-    // Método para verificar o usuário se ele existe
+    // Verifica se o usuário existe
     public boolean verificarUsuario(String login, String senha) {
-        String sql = montarConsultaUsuario(login, senha); //n8
-        try (Connection conn = conectarBD(); //n9
-                 Statement st = conn.createStatement();//n10
-                 ResultSet rs = st.executeQuery(sql)) {//n11
-            //se houver usuário, vai haver resultado
-            if (rs.next()) { //n12
-                nome = rs.getString("nome"); //n13
-                result = true; //n14
-            } //n15
+        boolean resultado = false; // começa como falso
+        final String sql = "SELECT nome FROM usuarios WHERE login = ? AND senha = ?";
 
-        } catch (Exception e) { //n16
-            System.out.println("Erro ao verificar usuário: " + e.getMessage());
+        try (Connection conn = conectarBD()) {
+
+            // Verifica se a conexão deu certo
+            if (conn == null) {
+                System.out.println("Erro: conexao nula");
+                return false;
+            }
+
+            // Prepara a query
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, login);
+                ps.setString(2, senha);
+
+                // Executa a consulta
+                try (ResultSet rs = ps.executeQuery()) {
+
+                    // Se houver resultado, usuário existe
+                    if (rs.next()) {
+                        String nome = rs.getString("nome");
+                        System.out.println("Usuário encontrado: " + nome);
+                        resultado = true;
+                    } else {
+                        System.out.println("Usuario nao encontrado.");
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao verificar usuario: " + e.getMessage());
         }
-        return result; //n17
+
+        // Retorna true se encontrou, false se não
+        if (resultado) {
+            System.out.println("Login valido");
+        } else {
+            System.out.println("Login invalido");
+        }
+
+        return resultado;
     }
 
-    // Método separado para montar a SQL
-    private String montarConsultaUsuario(String login, String senha) {
-        StringBuilder sb = new StringBuilder(); //n18
-        sb.append("SELECT nome FROM usuarios "); //n19
-        sb.append("WHERE login = '").append(login).append("' "); //n20
-        sb.append("AND senha = '").append(senha).append("'"); //n21
-        return sb.toString();//n22
-    }
 }
