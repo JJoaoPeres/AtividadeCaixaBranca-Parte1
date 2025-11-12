@@ -25,9 +25,9 @@ import java.sql.Statement;
  public Connection conectarBD() { (2)
      Connection conn = null; (3)
      try { (4)
-            Class.forName("com.mysql.Driver.Manager").newInstance();                  ( )
-            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";       (5)
-            conn = DriverManager.getConnection(url);                                  ( )
+            Class.forName("com.mysql.Driver.Manager").newInstance();                  (   )
+            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";       ( 5 )
+            conn = DriverManager.getConnection(url);                                  (   )
         } catch (Exception e) { (6)
         }
         return conn; (7)
@@ -45,13 +45,13 @@ import java.sql.Statement;
         sql += "where login = '" + login + "'";     ( 11 )
         sql += " and senha = '" + senha + "'";      (    )
 
-        try { (10)
-            Statement st = conn.createStatement();  ( 11 )
-            ResultSet rs = st.executeQuery(sql);    ( 12 )
-            if (rs.next()) { (13)
-                nome = rs.getString("nome"); ( 14 )
-                result = true;               ( 15 )
-            }  (16)
+        try { (12)
+            Statement st = conn.createStatement();  ( 13 )
+            ResultSet rs = st.executeQuery(sql);    ( 14 )
+            if (rs.next()) { (15)
+                nome = rs.getString("nome"); ( 16 )
+                result = true;               (    )
+            }  
         } catch (Exception e) { (17)
         } 
         return result; (18)
@@ -62,20 +62,55 @@ import java.sql.Statement;
 ```
 NOTAÇÃO DE GRAFO DE FLUXO 
 
-<img width="1024" height="768" alt="Yellow and White Modern Recruitment Process Flow Chart Graph" src="https://github.com/user-attachments/assets/299dbc83-ec3e-4e41-8466-0f6bb253e736" />
+<img width="1024" height="768" alt="Cópia de Cópia de Yellow and White Modern Recruitment Process Flow Chart Graph" src="https://github.com/user-attachments/assets/c35077fe-2770-4c2f-99b9-9d85c8c3d1b5" />
 
 COMPLEXIDADE CICLOMÁTICA 
 
 FÓRMULA: M = E − N + 2P
 
-23 - 22 + 2 = 3
+19 - 18 + 2 = 3
 
 CAMINHOS BÁSICOS:
 
 Quando o connection da certo, e o if(rs.next() da certo e o usuário foi achado:
-N1→N2→N3→N4→N5→N7→N8→N9→N10→N11→N12→N13→N14→N15→N17→N18→N19→N20→N21→N22
+1-2-3-4-5-7-8-9-10-11-12-13-14-15-16-18
 Quando o connection da certo, e o if(rs.next() da errado indo para o catch e o usuário não foi achado:
-N1→N2→N3→N4→N5→N7→N8→N9→N10→N11→N16→N17→N18→N19→N20→N21→N22
+1-2-3-4-5-7-8-9-10-11-12-13-14-17-18
 Quando o connection da errado, e o if(rs.next() da errado indo para o catch e o usuário não foi achado: 
-N1→N2→N6→N7→N8→N9→N10→N11→N16→N17→N18→N19→N20→N21→N22
+1-2-3-4-5-6-8-9-10-11-12-13-14-17-18
+
+CAMINHOS INDEPENDENTES:
+
+* Método conectarBD()
+
+Complexidade ciclomática: 2
+Há dois caminhos principais (com ou sem erro na conexão).
+
+Caminhos independentes:
+
+Caminho 1: Conexão estabelecida com sucesso
+→ (1 → 2 → 3 → 4 → 5 → 7)
+
+Caminho 2: Exceção lançada ao tentar conectar
+→ (1 → 2 → 3 → 4 → 5 → 6 → 7)
+
+* Método verificarUsuario()
+
+Complexidade ciclomática: 4
+São quatro fluxos possíveis: sucesso total, usuário não encontrado, erro SQL, e falha na conexão.
+
+Caminhos independentes:
+
+Caminho 1: Conexão e consulta bem-sucedidas, rs.next() verdadeiro (usuário encontrado)
+→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 18)
+
+Caminho 2: Conexão e consulta bem-sucedidas, mas rs.next() falso (usuário não encontrado)
+→ (8 → 9 → 10 → 11 → 12 → 13 → 14 → 18)
+
+Caminho 3: Erro ao executar a query (entra no bloco catch)
+→ (8 → 9 → 10 → 11 → 12 → 17 → 18)
+
+Caminho 4: Falha na conexão (conn = null, o try interno falha)
+→ (8 → 9 → 10 → 12 → 17 → 18)
+
 
