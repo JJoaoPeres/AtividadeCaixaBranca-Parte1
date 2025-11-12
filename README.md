@@ -11,56 +11,54 @@ AtividadeCaixaBranca-Parte1>Login>User
 Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL.
 Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
 Ainda assim, foi possível confirmar que a conexão com o servidor foi estabelecida com sucesso.
+
+AGORA ABAIXO SEGUE NOTAÇÃO DE GRAFO DE FLUXO; COMPLEXIDADE CICLOMÁTICA; CAMINHOS BÁSICOS.
 ```
-package Login;
+package login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class User {
-
-    public Connection conectarBD() {
-        Connection conn = null; //n1
-        try { //n2
-            Class.forName("com.mysql.cj.jdbc.Driver"); //n3
-            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123"; //n4
-            conn = DriverManager.getConnection(url); //n5
-        } catch (Exception e) { //n6
-            e.printStackTrace();
+ public class User { (1)
+ public Connection conectarBD() { (2)
+     Connection conn = null; (3)
+     try { (4)
+            Class.forName("com.mysql.Driver.Manager").newInstance();                  ( )
+            String url = "jdbc:mysql://127.0.0.1/test?user=lopes&password=123";       (5)
+            conn = DriverManager.getConnection(url);                                  ( )
+        } catch (Exception e) { (6)
         }
-        return conn; //n7
+        return conn; (7)
     }
 
-    public String nome = "";
+    public String nome = ""; 
     public boolean result = false;
 
-    public boolean verificarUsuario(String login, String senha) {
-        String sql = montarConsultaUsuario(login, senha); //n8
-        try (Connection conn = conectarBD(); //n9
-                 Statement st = conn.createStatement();//n10
-                 ResultSet rs = st.executeQuery(sql)) {//n11
-            if (rs.next()) { //n12
-                nome = rs.getString("nome"); //n13
-                result = true; //n14
-            } //n15
+    public boolean verificarUsuario(String login, String senha) { (8)
+        String sql = ""; (9)
+        Connection conn = conectarBD(); (10)
 
-        } catch (Exception e) { //n16
-            System.out.println("Erro ao verificar usuário: " + e.getMessage());
-        }
-        return result; //n17
-    }
+        // INSTRUÇÃO SQL
+        sql = "select nome from usuarios ";         (    )
+        sql += "where login = '" + login + "'";     ( 11 )
+        sql += " and senha = '" + senha + "'";      (    )
 
-    // Método separado para montar a SQL
-    private String montarConsultaUsuario(String login, String senha) {
-        StringBuilder sb = new StringBuilder(); //n18
-        sb.append("SELECT nome FROM usuarios "); //n19
-        sb.append("WHERE login = '").append(login).append("' "); //n20
-        sb.append("AND senha = '").append(senha).append("'"); //n21
-        return sb.toString();//n22
+        try { (10)
+            Statement st = conn.createStatement();  ( 11 )
+            ResultSet rs = st.executeQuery(sql);    ( 12 )
+            if (rs.next()) { (13)
+                nome = rs.getString("nome"); ( 14 )
+                result = true;               ( 15 )
+            }  (16)
+        } catch (Exception e) { (17)
+        } 
+        return result; (18)
     }
-} 
+}
+// fim da classe
+
 ```
 NOTAÇÃO DE GRAFO DE FLUXO 
 
