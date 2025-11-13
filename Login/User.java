@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 
 public class User {
 
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/test";
-    private static final String DB_USER = "lopes";
-    private static final String DB_PASS = "123";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/test";
+    private static final String USER = "lopes";
+    private static final String PASS = "123";
 
     // Conecta ao banco
     private Connection conectarBD() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+        return DriverManager.getConnection(URL, USER, PASS);
     }
 
     // Verifica se o usuário existe
