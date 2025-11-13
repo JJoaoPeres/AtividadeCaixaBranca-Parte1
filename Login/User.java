@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 
 public class User {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/test";
-    private static final String USER = "lopes";
-    private static final String PASS = "123";
+    private static final String URL = "jdbc:mysql://localhost:3306/usarios";
+    private static final String USER = "root";
+    private static final String PASS = "";
 
     // Conecta ao banco
     private Connection conectarBD() throws Exception {
