@@ -9,10 +9,10 @@ Para acessar o código, segue caminho abaixo:
 
 AtividadeCaixaBranca-Parte1>Login>User
 
-Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL. Apesar disso, durante a execução ocorreu um erro informando que o banco de dados não existia.
-Ainda assim, foi possível confirmar que a conexão com o servidor foi estabelecida com sucesso.
+Nos arquivos enviados pelo Git, foi incluída uma classe Main para realizar testes de execução e verificar o funcionamento do código, além de um diretório lib contendo o conector SQL. Foi criado um banco de dados no XAMPP, e com isso, foi possível confirmar que a conexão com o servidor foi estabelecida com sucesso, e o usuário lopes foi criado e achado.
 
-<img width="885" height="531" alt="Captura de tela 2025-11-09 211730" src="https://github.com/user-attachments/assets/0296f811-7959-4bad-86d6-7b96bae8c131" />
+<img width="877" height="466" alt="image" src="https://github.com/user-attachments/assets/f6a7b353-64aa-4bdc-b689-e77e22d33ac2" />
+
 
 Na versão alterada, o código foi corrigido para funcionar corretamente e se tornar mais seguro e organizado. Foram aplicadas melhorias como o uso do driver certo (com.mysql.cj.jdbc.Driver), tratamento de erros com try-with-resources, uso de PreparedStatement para evitar SQL Injection, e inclusão de comentários explicando o funcionamento dos métodos. Essas mudanças deixaram o código mais limpo, seguro e fácil de entender.
 
